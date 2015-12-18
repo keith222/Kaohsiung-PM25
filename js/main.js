@@ -48,7 +48,7 @@ function getWeatherData(){
 	var wind;
 	var temp;
 	
-	var url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-000001?sort=SiteName&offset=0&limit=12&filters={%22County%22:%22%E9%AB%98%E9%9B%84%E5%B8%82%22}&callback=?"
+	var url = "http://api.openweathermap.org/data/2.5/weather?q=Kaohsiung&units=metric&appid=9bd9cd77026d92f5c8c4b080d990223c&callback=?"
 	$.getJSON(url,function(result){
 		weather = result.weather;
 		temp = result.main.temp;
