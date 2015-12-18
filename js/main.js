@@ -48,7 +48,7 @@ function getWeatherData(){
 	var wind;
 	var temp;
 	
-	var url = "http:/api.openweathermap.org/data/2.5/weather?q=Kaohsiung&units=metric&appid=9bd9cd77026d92f5c8c4b080d990223c&callback=?"
+	//var url = "http:/api.openweathermap.org/data/2.5/weather?q=Kaohsiung&units=metric&appid=9bd9cd77026d92f5c8c4b080d990223c&callback=?"
 	$.getJSON(url,function(result){
 		weather = result.weather;
 		temp = result.main.temp;
