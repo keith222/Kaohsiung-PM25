@@ -29,7 +29,7 @@ function getJsonData(){
 		$("#load").fadeOut(500);//移除loading動畫
 
 		worstAlert(worstPollution,pollutionStation,fpmi);
-		getWeatherData();
+		//getWeatherData();
 	})
 	setTimeout(function(){getJsonData();},3600000);
 };
@@ -185,7 +185,7 @@ function worstAlert(point,station,fpmi){
 		
 	}
 
-	$("#head").css("background-image","url(image/"+img+")").fadeIn();//隨機選背景圖片
+	$("#head").css("background-image","url(image/"+img+")");//隨機選背景圖片
 	photoData(rand);
 	$(".condition").text(alertScale);//PM 2.5 指標
 	$(".condition, .alertPoint span:first").addClass(colorType);//指標顏色
