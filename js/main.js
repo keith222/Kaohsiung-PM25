@@ -29,7 +29,7 @@ function getJsonData(){
 		$("#load").fadeOut(500);//移除loading動畫
 
 		worstAlert(worstPollution,pollutionStation,fpmi);
-		//getWeatherData();
+		getWeatherData();
 	})
 	setTimeout(function(){getJsonData();},3600000);
 };
