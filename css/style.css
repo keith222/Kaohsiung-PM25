@@ -1,0 +1,113 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+
+a{
+	color: #31A4FF;
+}
+#head{	
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	max-height: 100%;
+	max-width: 100%;
+	width: 100%;
+}
+#weather,#wind{
+	font-size: 54px;
+}
+#footer{
+	position: fixed;
+	color: #fff;
+	width: 100%;
+	background-color: #222;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	bottom: 0;
+	z-index: 2;
+}
+
+#load{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: #aea39b;
+}
+#load div{
+	position: relative;
+	top:50%;
+    transform:translateY(-50%);
+}
+#load p{
+	color: #fff;
+	font-size: 24px;
+	font-family: 'Poiret One', cursive;
+}
+
+#photo-attribution{
+	bottom: 40px;
+	position: absolute;
+	right: 0;
+}
+#photo-attribution a{
+	color: #fff;
+	background-color: #000;
+	font-size: 12px;
+	font-family: 'Muli', sans-serif;
+	opacity: 0.75;
+	padding: 1px;
+}
+.alertText{
+	color: #fff;
+	top: 15%;
+	left: 5%;
+	position: absolute;
+	text-shadow: 3px 3px 3px #000;
+
+}
+
+.title{
+	font-family: 'Muli', sans-serif;
+}
+.title, .alertPoint{
+	font-size: 72px;
+}
+
+
+#temperature,#centigrade,.alertPoint{
+	font-family: 'Poiret One', cursive;
+}
+#temperature{
+	font-size: 64px; 
+}
+#centigrade{
+	font-size: 40px; 
+}
+
+.alertPoint > span:nth-child(2), .notice, .weather{
+	font-size: 24px;
+	margin-top: 15px;
+}
+.notice{
+	color: #FFF93C;
+}
+.condition{
+	font-size: 64px;
+}
+.sitedetail{
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 3px;
+}
+
+.font-danger{
+	color: #B910EA;
+}
+.font-warning{
+	color: #FF0B00;
+}
+.font-safe{
+	color: #3EE0FF;
+}
+.font-good{
+	color: #50F243;
+}
