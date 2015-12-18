@@ -25,12 +25,13 @@ function getJsonData(){
 		})
 		var pollutionStation = information[arrayIndex].SiteName;
 		var fpmi = information[arrayIndex].FPMI;
+
+		$("#load").fadeOut(500);//移除loading動畫
+
 		worstAlert(worstPollution,pollutionStation,fpmi);
 		getWeatherData();
-
 	})
-	
-	//setTimeout(function(){getJsonData();}",3600000);
+	setTimeout(function(){getJsonData();},3600000);
 };
 
 //動畫跑數字
@@ -70,17 +71,23 @@ function weatherIcon(code){
 		daynight = "day";
 	}
 
-	if(code >= 200 && code <= 232){
+	if(code >= 200 && code <= 232){ //code 200~232 thunderstorm icon
 		icon = "wi-"+daynight+"-thunderstorm";
-	}else if(code >= 300 && code <= 321){
-		icon = "wi-"+daynight+"-rain";
+	}else if(code >= 300 && code <= 321){//code 300~321 showers rain icon
+		icon = "wi-"+daynight+"-showers";
 	}else if(code >= 500 && code <= 531){
-		icon = "wi-"+daynight+"-rain";
-	}else if(code >= 600 && code <= 622){
+		if(code <= 504){// rain icon
+			icon = "wi-"+daynight+"-rain";
+		}else if(code == 511){// snow icon
+			icon = "wi-"+daynight+"-snow";
+		}else{// showers icon
+			icon = "wi-"+daynight+"-showers"
+		}
+	}else if(code >= 600 && code <= 622){//code 600~622 snow icon
 		icon = "wi-"+daynight+"-snow";
-	}else if(code >= 701 && code <= 781){
+	}else if(code >= 701 && code <= 781){// 701~781 fog icon
 		icon = "wi-"+daynight+"-fog";
-	}else if(code >= 800 && code <= 804){
+	}else if(code >= 800 && code <= 804){ 
 		if(code == 800){
 			if(daynight == "day"){
 				icon = "wi-day-sunny";
@@ -97,6 +104,50 @@ function weatherIcon(code){
 	return icon
 }
 
+//照片來源
+function photoData(type){
+
+	var img_taker;
+	var img_url;
+	type = type.split("-");
+	if(type[0] == "g"){
+		switch (type[1]){
+			case "1":
+				img_taker = "Yang Tun-Kai";
+				break;
+			case "2":
+				img_taker = "威翰 陳";
+				img_url = "https://www.flickr.com/photos/can185-way/17767588091/";
+				break;
+			case "3":
+				img_taker = "威翰 陳";
+				img_url = "https://www.flickr.com/photos/can185-way/18274247761/";
+				break;
+			case "4":
+				img_taker = "Chi-Hung Lin";
+				img_url = "https://www.flickr.com/photos/92585929@N06/19888446413/";
+				break;
+		}
+	}else{
+		switch (type[1]){
+			case "1":
+				img_taker = "Formosa Wandering";
+				img_url = "https://www.flickr.com/photos/polanyi/3155609901/";
+				break;
+			case "2":
+				img_taker = "Formosa Wandering";
+				img_url = "https://www.flickr.com/photos/polanyi/3156445614/";
+				break;
+			case "3":
+				img_taker = "Formosa Wandering";
+				img_url = "https://www.flickr.com/photos/polanyi/4068683960/";
+				break;			
+		}
+	}
+	$("#photo-attribution span").text(img_taker);
+	$("#photo-attribution a").prop("href",img_url);
+}
+
 function worstAlert(point,station,fpmi){
 	$(".condition").removeClass("font-good font-safe font-warning font-danger")//消除顏色CSS
 		
@@ -107,39 +158,42 @@ function worstAlert(point,station,fpmi){
 	var img;
 	var rand;
 	if(fpmi<4){
-		rand = Math.floor(Math.random() * 4) + 1; 
-		img= "g-"+rand+".jpg";
+		rand = "g-"+(Math.floor(Math.random() * 4) + 1); 
+		img= rand+".jpg";
 		alertScale = "良好";
 		notice = "正常戶外活動。";
 		colorType = "font-good";
 		$(".notice").text(notice);
 	}else if(fpmi < 7){
-		rand = Math.floor(Math.random() * 4) + 1;
-		img= "g-"+rand+".jpg";
+		rand = "g-"+(Math.floor(Math.random() * 4) + 1);
+		img= rand+".jpg";
 		alertScale = "普通";
 		notice = "正常戶外活動。";
 		colorType = "font-safe";
 	}else if(fpmi <10){
-		rand = Math.floor(Math.random() * 3) + 1; 
-		img= "b-"+rand+".jpg";
+		rand = "b-"+(Math.floor(Math.random() * 3) + 1); 
+		img= rand+".jpg";
 		alertScale = "不良";
 		notice = "任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應該考慮減少戶外活動。";
 		colorType = "font-warning";
 	}else{
-		rand = Math.floor(Math.random() * 3) + 1;
-		img= "b-"+rand+".jpg";
+		rand = "b-"+(Math.floor(Math.random() * 3) + 1);
+		img= rand+".jpg";
 		alertScale = "極度危險";
 		notice = "任何人如果有不適，如眼痛，咳嗽或喉嚨痛等，應減少體力消耗，特別是減少戶外活動。";
 		colorType = "font-danger";
 		
 	}
-	$(".mask").hide()
-	$("#head").css("background-image","url(image/"+img+")");
-	$(".condition").text(alertScale);
-	$(".condition, .alertPoint span:first").addClass(colorType);
-	$(".alertPoint span").eq(1).html("<strong>μg/m3 ("+station+")</strong>");
-	$(".notice").text(notice);
-	countAni(0,point)
+
+	$("#head").css("background-image","url(image/"+img+")").fadeIn();//隨機選背景圖片
+	photoData(rand);
+	$(".condition").text(alertScale);//PM 2.5 指標
+	$(".condition, .alertPoint span:first").addClass(colorType);//指標顏色
+	$(".alertPoint span").eq(1).html("<strong>μg/m3 ("+station+")</strong>");//PM2.5數值
+	$(".notice").text(notice);//建議事項
+	$(".alertText").removeClass("hide");
+	$("#photo-attribution").removeClass("hide");
+	countAni(0,point);//數值動畫
 }
 
 

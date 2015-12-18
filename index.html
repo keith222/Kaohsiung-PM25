@@ -14,8 +14,13 @@
 </head>
 <body>
 	<div id="head">
-		<div class="mask"></div>
-		<div class="alertText">
+		<div id="load">
+			<div>
+				<img src="image/sunny.svg">
+				<p>Loading...</p>
+			</div>
+		</div>
+		<div class="alertText hide">
 			<div class="title">Kaohsiung PM 2.5</div>
 			<div class="alertPoint">
 				<span>0</span>
@@ -28,9 +33,11 @@
 				<span id="centigrade">&#176;C</span>
 				<span id="weather">/<i class="wi "></i> </span>
 				<span id="wind"><i id="winddir" class="wi"></i> <i id="windspeed" class="wi"></i></span>
-			</div>
+			</div>			
 		</div>
-		
+		<div id="photo-attribution" class="hide">
+				<a target="_blank">Photo by <span></span>, CC-BY-NC</a>
+		</div>
 	</div>	
 	<div id="footer" class="text-center">
 		<span>
