@@ -26,8 +26,6 @@ function getJsonData(){
 		var pollutionStation = information[arrayIndex].SiteName;
 		var fpmi = information[arrayIndex].FPMI;
 
-		$("#load").fadeOut(500);//移除loading動畫
-
 		worstAlert(worstPollution,pollutionStation,fpmi);
 		getWeatherData();
 	})
@@ -185,7 +183,7 @@ function worstAlert(point,station,fpmi){
 		
 	}
 
-	$("#head").css("background-image","url(image/"+img+")").fadeIn();//隨機選背景圖片
+	$("#head").css("background-image","url(image/"+img+")");//隨機選背景圖片
 	photoData(rand);
 	$(".condition").text(alertScale);//PM 2.5 指標
 	$(".condition, .alertPoint span:first").addClass(colorType);//指標顏色
@@ -193,6 +191,7 @@ function worstAlert(point,station,fpmi){
 	$(".notice").text(notice);//建議事項
 	$(".alertText").removeClass("hide");
 	$("#photo-attribution").removeClass("hide");
+	$("#load").fadeOut(500);//移除loading動畫
 	countAni(0,point);//數值動畫
 }
 
