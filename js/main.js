@@ -26,8 +26,6 @@ function getJsonData(){
 		var pollutionStation = information[arrayIndex].SiteName;
 		var fpmi = information[arrayIndex].FPMI;
 
-		$("#load").fadeOut(500);//移除loading動畫
-
 		worstAlert(worstPollution,pollutionStation,fpmi);
 		getWeatherData();
 	})
@@ -193,6 +191,7 @@ function worstAlert(point,station,fpmi){
 	$(".notice").text(notice);//建議事項
 	$(".alertText").removeClass("hide");
 	$("#photo-attribution").removeClass("hide");
+	$("#load").fadeOut(500);//移除loading動畫
 	countAni(0,point);//數值動畫
 }
 
