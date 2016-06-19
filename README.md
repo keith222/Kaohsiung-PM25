@@ -4,8 +4,6 @@
 * PM 2.5 數值：提供環保署高雄地區 PM 2.5 檢測站中最高之檢測站。
 * 天氣：提供當下天氣資訊。
 
-** 資料來源： [OpenData.epa](http://opendata.epa.gov.tw/) 及 [Openweathermap](http://openweathermap.org/) **
-
 # Kaohsiung PM 2.5
 - http://keith222.github.io/Kaohsiung-PM25/
 - Kaohsiung PM 2.5 is a website for providing the worest PM 2.5 point in Kaohsiung City.
