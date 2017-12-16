@@ -4,25 +4,27 @@ getJsonData();
 function getJsonData(){
 	var pollution = [];
 	//取環保署上的空污檢測資料
-	var url = 'http://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-000001?sort=SiteName&offset=0&limit=12&filters={%22County%22:%22%E9%AB%98%E9%9B%84%E5%B8%82%22}&callback=?'
+	var url = 'http://opendata2.epa.gov.tw/AQI.json';
 	$.getJSON(url,function(result){
-		var record = result.result.records
+		var record = result
 
 		for(var k in record){
-			information.push({"SiteName": record[k].SiteName,"PM2.5": record[k]["PM2.5"], "Status": record[k].Status, "FPMI": record[k].FPMI, "WindSpeed": record[k].WindSpeed, "WindDirec": record[k].WindDirec, "FPMI": record[k].FPMI})
-			pollution[k] = parseInt(record[k]["PM2.5"]);
+            if (record[k].County == "高雄市") {
+                information.push({"SiteName": record[k].SiteName,"PM2.5": record[k]["PM2.5"], "Status": record[k].Status, "FPMI": record[k].FPMI, "WindSpeed": record[k].WindSpeed, "WindDirec": record[k].WindDirec, "FPMI": record[k].FPMI})
+                pollution.push(parseInt(record[k]["PM2.5"]));
+            }
 		}
 
-		pollution.sort(sortNumber)//排序污染數值
-		var worstPollution = pollution[pollution.length-1]//取得最高污染數值
-	
+		pollution.sort(sortNumber);//排序污染數值     
+		var worstPollution = pollution[pollution.length-1];//取得最高污染數值
+        
 		//找出高污染的測量站
-		var arrayIndex 
+		var arrayIndex;
 		$(information).each(function(index){
-			
 			if(this["PM2.5"] == worstPollution)
 				arrayIndex = index;
 		})
+        
 		var pollutionStation = information[arrayIndex].SiteName;
 		var fpmi = information[arrayIndex].FPMI;
 
